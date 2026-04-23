@@ -5,10 +5,21 @@ sur les DataFrames PySpark.
 Chaque fonction doit :
 - prendre un DataFrame en entrée
 - retourner un DataFrame transformé
-""" 
+"""
 
 def rename_columns(df):
     """
     Renomme les colonnes pour améliorer la lisibilité.
     """
     return df.withColumnRenamed("old_name", "new_name")
+
+
+def clean_nulls(df):
+    """
+    Supprime toutes les lignes contenant des valeurs nulles.
+
+    Explication :
+    Spark stocke les données sous forme de DataFrame distribué.
+    dropna() supprime les lignes où au moins une colonne est NULL.
+    """
+    return df.dropna()
