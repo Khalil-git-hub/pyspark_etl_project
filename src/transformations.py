@@ -1,18 +1,19 @@
 """
 Ce fichier contient toutes les transformations appliquées
 sur les DataFrames PySpark.
-
-Chaque fonction doit :
-- prendre un DataFrame en entrée
-- retourner un DataFrame transformé
 """
+
+from pyspark.sql.functions import avg
 
 def clean_nulls(df):
     """
     Supprime toutes les lignes contenant des valeurs nulles.
-
-    Explication :
-    Spark stocke les données sous forme de DataFrame distribué.
-    dropna() supprime les lignes où au moins une colonne est NULL.
     """
     return df.dropna()
+
+
+def average_sales(df):
+    """
+    Calcule la moyenne des ventes par région.
+    """
+    return df.groupBy("region").agg(avg("sales").alias("avg_sales"))
