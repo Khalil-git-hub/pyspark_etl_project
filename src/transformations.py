@@ -5,7 +5,8 @@ sur les DataFrames PySpark.
 Chaque fonction doit :
 - prendre un DataFrame en entrée
 - retourner un DataFrame transformé
-"""
+""" 
+
 def rename_columns(df):
     """
     Renomme les colonnes pour améliorer la lisibilité.
