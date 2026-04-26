@@ -1,27 +1,18 @@
 """
-Ce fichier contient toutes les transformations appliquées
-sur les DataFrames PySpark.
+Transformations PySpark ETL
 """
 
-from pyspark.sql.functions import avg
-
-
-def rename_columns(df):
-    """
-    Renomme les colonnes pour améliorer la lisibilité.
-    """
-    return df.withColumnRenamed("old_name", "new_name")
+from pyspark.sql.functions import col, avg
 
 
 def clean_nulls(df):
-    """
-    Supprime toutes les lignes contenant des valeurs nulles.
-    """
     return df.dropna()
 
 
+def rename_columns(df):
+    return df.withColumnRenamed("produit", "product")
+
+
 def average_sales(df):
-    """
-    Calcule la moyenne des ventes par région.
-    """
+    df = df.withColumn("sales", col("prix") * col("quantite"))
     return df.groupBy("region").agg(avg("sales").alias("avg_sales"))
